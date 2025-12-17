@@ -1,0 +1,1073 @@
+/* =============================================
+   Service Page Styles - Full Parallax Effect
+   ============================================= */
+
+.service-page {
+  padding-top: 0;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   Hero Section - Full Screen Parallax
+   ============================================= */
+.service-hero-parallax {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content-centered {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+  color: white;
+}
+
+.hero-badge-large {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 30px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 10px 30px rgba(77, 168, 218, 0.3);
+}
+
+.hero-content-centered h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content-centered p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: var(--spacing-md);
+  transition: var(--transition-normal);
+  width: 100%;
+  text-align: center;
+}
+
+.scroll-indicator:hover {
+  transform: scale(1.1);
+}
+
+.scroll-indicator svg {
+  font-size: 1.5rem;
+}
+
+/* =============================================
+   Parallax Service Sections
+   ============================================= */
+.parallax-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding: 80px 0;
+}
+
+.parallax-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
+}
+
+.parallax-section.content-right .parallax-overlay {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+}
+
+.parallax-section.content-left .parallax-content {
+  justify-content: flex-start;
+}
+
+.parallax-section.content-right .parallax-content {
+  justify-content: flex-end;
+}
+
+.content-box {
+  max-width: 500px;
+  padding: var(--spacing-xxl);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.section-number {
+  display: inline-block;
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: var(--spacing-md);
+}
+
+.content-box h2 {
+  font-size: 2.2rem;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.content-box .section-subtitle {
+  font-size: 1.1rem;
+  color: var(--primary-blue);
+  font-weight: 500;
+  margin-bottom: var(--spacing-lg);
+}
+
+.content-box p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.feature-list li svg {
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+}
+
+/* =============================================
+   Services Pricing Section
+   ============================================= */
+.services-pricing-section {
+  background: linear-gradient(135deg, var(--primary-light-blue) 0%, #D4EAF7 50%, var(--primary-bg) 100%);
+  padding: var(--spacing-xxl) 0;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.pricing-card {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: white;
+  border-radius: var(--radius-lg);
+  transition: var(--transition-normal);
+  cursor: pointer;
+}
+
+.pricing-card:hover {
+  box-shadow: 0 20px 50px rgba(77, 168, 218, 0.2);
+}
+
+.pricing-card .service-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.pricing-card h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.price-tag {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--primary-blue);
+  font-weight: 600;
+  padding: 8px 16px;
+  background: rgba(77, 168, 218, 0.1);
+  border-radius: var(--radius-md);
+}
+
+/* =============================================
+   Gallery Section - Parallax
+   ============================================= */
+.gallery-parallax-section,
+.gallery-overlay,
+.gallery-grid,
+.gallery-item,
+.gallery-overlay-item {
+  display: none;
+}
+/* =============================================
+   Booking Section - Parallax
+   ============================================= */
+.booking-parallax-section {
+  position: relative;
+  padding: var(--spacing-xxl) 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.booking-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  z-index: 1;
+}
+
+.booking-parallax-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.booking-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--spacing-xxl);
+  align-items: start;
+}
+
+.booking-info {
+  color: white;
+}
+
+.booking-info h2 {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.booking-info > p {
+  opacity: 0.9;
+  line-height: 1.7;
+  margin-bottom: var(--spacing-xl);
+  font-size: 1.1rem;
+}
+
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.info-item svg {
+  width: 50px;
+  height: 50px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: var(--radius-md);
+}
+
+.info-item h4 {
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.info-item p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+/* Process Steps */
+.process-steps h4 {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.steps {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.step-num {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--radius-full);
+}
+
+.step p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Booking Form Card */
+.booking-form-card {
+  padding: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+}
+
+.booking-form h3 {
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* Two Column Form Grid */
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-grid-2col .form-group {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.form-group label svg {
+  color: var(--primary-blue);
+}
+
+.form-group .input-field {
+  width: 100%;
+}
+
+/* Phone Input with Prefix */
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition-fast);
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(77, 168, 218, 0.1);
+}
+
+.phone-prefix {
+  padding: 14px 12px;
+  background: rgba(77, 168, 218, 0.1);
+  color: var(--primary-blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-right: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.phone-input {
+  flex: 1;
+  border: none;
+  padding: 14px 16px;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.phone-input:focus {
+  outline: none;
+}
+
+.form-group.error .phone-input-wrapper {
+  border-color: #e74c3c;
+}
+
+.form-group select.input-field {
+  cursor: pointer;
+}
+
+.form-group textarea.input-field {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group.error .input-field {
+  border-color: #e74c3c;
+}
+
+.error-text {
+  display: block;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 6px;
+}
+
+/* File Upload */
+.file-upload {
+  position: relative;
+}
+
+.file-upload input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-label {
+  display: block;
+  padding: 14px 18px;
+  background: var(--glass-bg);
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.file-upload:hover .file-label {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+  margin-top: var(--spacing-md);
+}
+
+.submit-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.submit-btn .loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: var(--spacing-sm);
+}
+
+/* Success Message */
+.success-message {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-xl);
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #27ae60;
+  color: white;
+  font-size: 2.5rem;
+  border-radius: var(--radius-full);
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.success-message h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.success-message p {
+  color: var(--text-muted);
+}
+
+/* Contact CTA */
+.service-contact-cta {
+  padding: 60px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-md);
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+}
+
+.contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gradient-primary);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.contact-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.contact-card p {
+  margin: 2px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* =============================================
+   Responsive Styles
+   ============================================= */
+@media (max-width: 1200px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .content-box {
+    max-width: 450px;
+    padding: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 992px) {
+  /* Disable parallax on tablets */
+  .service-hero-parallax,
+  .parallax-section,
+  .gallery-parallax-section,
+  .booking-parallax-section {
+    background-attachment: scroll;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 2.8rem;
+  }
+
+  .parallax-section {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .parallax-content {
+    justify-content: center !important;
+  }
+
+  .booking-wrapper {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .service-hero-parallax {
+    min-height: 100vh;
+    height: auto;
+    padding: 100px 20px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content-centered p {
+    font-size: 1rem;
+  }
+
+  .hero-badge-large {
+    font-size: 0.85rem;
+    padding: 10px 20px;
+  }
+
+  .content-box {
+    max-width: 100%;
+    padding: var(--spacing-lg);
+  }
+
+  .content-box h2 {
+    font-size: 1.8rem;
+  }
+
+  .section-number {
+    font-size: 3rem;
+  }
+
+  .steps {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .booking-info h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .pricing-card {
+    padding: var(--spacing-md);
+  }
+
+  .pricing-card .service-icon {
+    font-size: 2rem;
+  }
+
+  .pricing-card h3 {
+    font-size: 0.85rem;
+  }
+
+  .price-tag {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  /* Form 2 column to 1 column on mobile */
+  .form-grid-2col {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* =============================================
+   MOBILE OPTIMIZATION - Compact Layout
+   ============================================= */
+@media (max-width: 480px) {
+  .service-page {
+    padding-top: 0 !important;
+  }
+
+  /* Hero - compact full screen */
+  .service-hero-parallax {
+    min-height: 100svh;
+    padding: 80px 15px 40px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 1.6rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-content-centered p {
+    font-size: 0.9rem !important;
+    margin-bottom: 30px !important;
+  }
+
+  .hero-badge-large {
+    font-size: 0.75rem !important;
+    padding: 8px 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .scroll-indicator {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm);
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .scroll-indicator span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  
+  .scroll-indicator svg {
+    font-size: 1.2rem;
+  }
+
+  /* Parallax Sections - compact */
+  .parallax-section {
+    min-height: auto !important;
+    padding: 40px 15px !important;
+  }
+
+  .parallax-content {
+    padding: 0 !important;
+  }
+
+  .content-box {
+    padding: 20px !important;
+    border-radius: 12px !important;
+  }
+
+  .section-number {
+    font-size: 2rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .content-box h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .content-box .section-subtitle {
+    font-size: 0.9rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .content-box p {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 15px !important;
+  }
+
+  .feature-list li {
+    font-size: 0.8rem !important;
+    padding: 6px 0 !important;
+  }
+
+  .feature-list li svg {
+    font-size: 1rem !important;
+  }
+
+  /* Pricing Section - compact */
+  .services-pricing-section {
+    padding: 30px 0 !important;
+  }
+
+  .services-pricing-section .section-header h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .services-pricing-section .section-header p {
+    font-size: 0.75rem !important;
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .pricing-card {
+    padding: 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .pricing-card .service-icon {
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .pricing-card h3 {
+    font-size: 0.7rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .price-tag {
+    font-size: 0.65rem !important;
+    padding: 4px 8px !important;
+  }
+
+  /* Gallery Section - compact */
+  .gallery-parallax-section {
+    padding: 30px 0 !important;
+  }
+
+  .section-header.light h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .section-header.light p {
+    font-size: 0.8rem !important;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .gallery-item {
+    border-radius: 8px !important;
+  }
+
+  .gallery-overlay-item span {
+    font-size: 0.75rem !important;
+  }
+
+  /* Booking Section - compact */
+  .booking-parallax-section {
+    padding: 30px 0 !important;
+  }
+
+  .booking-wrapper {
+    gap: 20px !important;
+  }
+
+  .booking-info h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .booking-info > p {
+    font-size: 0.85rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  .info-item svg {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 10px !important;
+  }
+
+  .info-item h4 {
+    font-size: 0.85rem !important;
+  }
+
+  .info-item p {
+    font-size: 0.75rem !important;
+  }
+
+  .process-steps h4 {
+    font-size: 0.95rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .step-num {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .step p {
+    font-size: 0.75rem !important;
+  }
+
+  /* Form - compact */
+  .booking-form-card {
+    padding: 20px !important;
+  }
+
+  .booking-form h3 {
+    font-size: 1.1rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  .form-group {
+    margin-bottom: 12px !important;
+  }
+
+  .form-group label {
+    font-size: 0.8rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .form-group .input-field {
+    padding: 10px 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .file-label {
+    padding: 10px 12px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .submit-btn {
+    padding: 12px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .success-icon {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 1.8rem !important;
+  }
+
+  .success-message h3 {
+    font-size: 1.2rem !important;
+  }
+
+  .success-message p {
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-content-centered h1 {
+    font-size: 1.4rem !important;
+  }
+
+  .pricing-grid {
+    gap: 6px !important;
+  }
+
+  .pricing-card {
+    padding: 10px !important;
+  }
+
+  .pricing-card .service-icon {
+    font-size: 1.3rem !important;
+  }
+
+  .pricing-card h3 {
+    font-size: 0.65rem !important;
+  }
+
+  .content-box h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .content-box p {
+    font-size: 0.8rem !important;
+  }
+}

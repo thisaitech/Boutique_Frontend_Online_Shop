@@ -1,0 +1,17 @@
+/* =============================================================================
+   Page Transition Styles
+   ============================================================================= */
+
+.page-transition {
+  width: 100%;
+  min-height: 100vh;
+  will-change: transform, opacity;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none !important;
+    transition: none !important;
+  }
+}

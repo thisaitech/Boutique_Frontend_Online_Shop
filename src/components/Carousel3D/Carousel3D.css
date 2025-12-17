@@ -1,0 +1,287 @@
+/* =============================================================================
+   3D INFINITE CAROUSEL - RESPONSIVE DESIGN
+   ============================================================================= */
+
+.carousel-3d-container {
+  position: relative;
+  width: 100%;
+  height: 450px; /* Mobile default */
+  perspective: 2000px;
+  overflow: hidden;
+  background: rgb(23, 23, 23); /* neutral-900 - dark background */
+  border-radius: 1.5rem; /* rounded-3xl */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Desktop height */
+@media (min-width: 768px) {
+  .carousel-3d-container {
+    height: 600px;
+  }
+}
+
+/* Empty state */
+.carousel-3d-container.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.carousel-empty-message {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+/* Carousel track - holds all cards */
+.carousel-3d-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* Individual carousel card */
+.carousel-3d-card {
+  position: absolute;
+  height: 85%; /* Mobile: taller aspect ratio (9:16) */
+  border-radius: 1.5rem; /* rounded-3xl */
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* shadow-2xl */
+  cursor: grab;
+  transform-style: preserve-3d;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Desktop: Fixed width cards */
+@media (min-width: 768px) {
+  .carousel-3d-card {
+    height: 90%;
+    width: 320px;
+  }
+}
+
+.carousel-3d-card:active {
+  cursor: grabbing;
+}
+
+/* ProductCard inside carousel should fill container */
+.carousel-3d-card > * {
+  height: 100%;
+  width: 100%;
+}
+
+/* Gradient overlay for text readability (optional enhancement) */
+.carousel-3d-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =============================================================================
+   ARROW BUTTONS (Desktop Only)
+   ============================================================================= */
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-arrow-left {
+  left: 20px;
+}
+
+.carousel-arrow-right {
+  right: 20px;
+}
+
+/* Hide arrows on mobile */
+@media (max-width: 767px) {
+  .carousel-arrow {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   PAGINATION DOTS
+   ============================================================================= */
+
+.carousel-pagination {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.pagination-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.pagination-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Mobile: Smaller dots */
+@media (max-width: 767px) {
+  .carousel-pagination {
+    bottom: 12px;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
+  .pagination-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .pagination-dot.active {
+    width: 18px;
+  }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/* GPU acceleration */
+.carousel-3d-container,
+.carousel-3d-track,
+.carousel-3d-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth font rendering during animations */
+.carousel-3d-card {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================================================
+   ACCESSIBILITY
+   ============================================================================= */
+
+/* Focus states */
+.carousel-arrow:focus-visible,
+.pagination-dot:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-3d-card {
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .carousel-arrow {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .pagination-dot.active {
+    width: 28px;
+  }
+
+  /* Remove hover states on touch devices */
+  .carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* =============================================================================
+   SAFE AREA INSETS (Notched Devices)
+   ============================================================================= */
+
+@supports (padding: max(0px)) {
+  @media (max-width: 767px) {
+    .carousel-pagination {
+      bottom: max(12px, env(safe-area-inset-bottom));
+    }
+  }
+}

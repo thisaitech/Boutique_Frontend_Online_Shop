@@ -1,0 +1,1134 @@
+/* =============================================
+   Promo Section - Dynamic Advertisement Cards
+   ============================================= */
+
+.promo-section {
+  padding: 3rem 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(233, 30, 140, 0.03) 100%);
+  overflow: hidden;
+}
+
+/* Ensure promo section is flush when inside shop-page */
+.shop-page > .promo-section {
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.promo-grid.single {
+  grid-template-columns: 1fr;
+  justify-items: stretch;
+  max-width: 100%;
+}
+
+.promo-grid.single .promo-card {
+  width: 100%;
+  min-height: 420px;
+  max-width: 100%;
+}
+
+/* Individual Promo Card */
+.promo-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.promo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(var(--accent-color-rgb, 233, 30, 140), 0.25);
+}
+
+/* Featured Card - Center Position */
+.promo-card.promo-featured {
+  min-height: 420px;
+  background: linear-gradient(145deg, var(--accent-color) 0%, color-mix(in srgb, var(--accent-color) 80%, black) 100%);
+}
+
+.promo-card.promo-featured .promo-title,
+.promo-card.promo-featured .promo-subtitle,
+.promo-card.promo-featured .promo-offer {
+  color: white;
+}
+
+/* Background Animation Layer */
+.promo-bg-animation {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(var(--accent-color-rgb, 233, 30, 140), 0.05) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.promo-card:hover .promo-bg-animation {
+  opacity: 1;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Promo Image */
+.promo-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.promo-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  transition: all 0.5s ease;
+  box-sizing: border-box;
+}
+
+.promo-card:hover .promo-image img {
+  transform: scale(1.05);
+  opacity: 0.4;
+}
+
+.promo-card.promo-featured .promo-image img {
+  opacity: 0.25;
+}
+
+/* Content */
+.promo-content {
+  position: relative;
+  z-index: 5;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Badge */
+.promo-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(var(--accent-color-rgb, 233, 30, 140), 0.3);
+}
+
+.promo-badge.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+.promo-badge.mega-badge {
+  font-size: 0.8rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #1a1a1a;
+}
+
+.promo-badge.bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.05); }
+}
+
+/* Title */
+.promo-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.promo-title.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #ffd700 50%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Subtitle */
+.promo-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.promo-card.promo-featured .promo-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Offer */
+.promo-offer {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin: 0.5rem 0;
+}
+
+.promo-offer.pulse-glow {
+  text-shadow: 0 0 20px rgba(var(--accent-color-rgb, 233, 30, 140), 0.3);
+}
+
+.promo-offer.big-offer {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #ffd700 0%, #fff 50%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.promo-offer.wave-text {
+  animation: wave-text 2s ease-in-out infinite;
+}
+
+@keyframes wave-text {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Timer Label */
+.promo-timer {
+  margin-top: 0.25rem;
+}
+
+.timer-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* CTA Button */
+.promo-cta {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: var(--accent-color);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.promo-card.promo-featured .promo-cta {
+  background: white;
+  color: var(--accent-color);
+}
+
+.promo-cta.shimmer-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer-btn 2s infinite;
+}
+
+@keyframes shimmer-btn {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.promo-cta.glow-btn {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Featured Ribbon */
+.promo-ribbon {
+  position: absolute;
+  top: 20px;
+  right: -35px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #1a1a1a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.4rem 3rem;
+  transform: rotate(45deg);
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   Animation: Sparkle Effect
+   ============================================= */
+.promo-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.promo-sparkles .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle-float 3s ease-in-out infinite;
+}
+
+.promo-sparkles .sparkle-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.promo-sparkles .sparkle-2 { top: 20%; right: 15%; animation-delay: 0.5s; }
+.promo-sparkles .sparkle-3 { bottom: 30%; left: 20%; animation-delay: 1s; }
+.promo-sparkles .sparkle-4 { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+.promo-sparkles .sparkle-5 { top: 50%; left: 5%; animation-delay: 2s; }
+
+@keyframes sparkle-float {
+  0% { opacity: 0; transform: translateY(0) scale(0); }
+  25% { opacity: 1; transform: translateY(-10px) scale(1); }
+  50% { opacity: 0.8; transform: translateY(-20px) scale(0.8); }
+  75% { opacity: 0.4; transform: translateY(-30px) scale(0.5); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0); }
+}
+
+.promo-card:hover .promo-sparkles .sparkle {
+  animation-duration: 2s;
+}
+
+/* =============================================
+   Animation: Confetti Effect
+   ============================================= */
+.promo-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.promo-stars .star {
+  position: absolute;
+  font-size: 1rem;
+  color: #ffd700;
+  opacity: 0;
+  animation: star-twinkle 2s ease-in-out infinite;
+}
+
+.promo-stars .star-1 { top: 8%; left: 12%; animation-delay: 0s; }
+.promo-stars .star-2 { top: 15%; right: 18%; animation-delay: 0.3s; }
+.promo-stars .star-3 { top: 35%; left: 8%; animation-delay: 0.6s; }
+.promo-stars .star-4 { bottom: 35%; right: 12%; animation-delay: 0.9s; }
+.promo-stars .star-5 { bottom: 18%; left: 15%; animation-delay: 1.2s; }
+.promo-stars .star-6 { bottom: 10%; right: 20%; animation-delay: 1.5s; }
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+.promo-confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.promo-confetti .confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  animation: confetti-fall 3s ease-in-out infinite;
+}
+
+.promo-confetti .c1 { background: #ff6b6b; top: -5%; left: 15%; animation-delay: 0s; border-radius: 2px; }
+.promo-confetti .c2 { background: #ffd93d; top: -5%; left: 35%; animation-delay: 0.4s; border-radius: 50%; }
+.promo-confetti .c3 { background: #6bcb77; top: -5%; left: 55%; animation-delay: 0.8s; border-radius: 2px; transform: rotate(45deg); }
+.promo-confetti .c4 { background: #4d96ff; top: -5%; left: 75%; animation-delay: 1.2s; border-radius: 50%; }
+.promo-confetti .c5 { background: #e91e8c; top: -5%; left: 25%; animation-delay: 1.6s; border-radius: 2px; }
+.promo-confetti .c6 { background: #9b59b6; top: -5%; left: 65%; animation-delay: 2s; border-radius: 50%; }
+
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(400px) rotate(720deg); }
+}
+
+.promo-card:hover .promo-confetti .confetti {
+  animation-duration: 2.5s;
+}
+
+/* =============================================
+   Animation: Wave Effect
+   ============================================= */
+.promo-waves {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.promo-waves .wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: linear-gradient(180deg, transparent 0%, rgba(var(--accent-color-rgb, 233, 30, 140), 0.1) 100%);
+  border-radius: 50% 50% 0 0;
+  animation: wave-move 4s ease-in-out infinite;
+}
+
+.promo-waves .wave-1 { opacity: 0.3; animation-delay: 0s; bottom: 0; }
+.promo-waves .wave-2 { opacity: 0.2; animation-delay: 1s; bottom: 10px; height: 80px; }
+.promo-waves .wave-3 { opacity: 0.1; animation-delay: 2s; bottom: 20px; height: 60px; }
+
+@keyframes wave-move {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-25%); }
+}
+
+/* Decorative Elements */
+.promo-decoration {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(var(--accent-color-rgb, 233, 30, 140), 0.1);
+}
+
+.deco-circle.circle-1 {
+  width: 100px;
+  height: 100px;
+  top: -20px;
+  right: -20px;
+}
+
+.deco-circle.circle-2 {
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  left: -15px;
+}
+
+.deco-circle.circle-3 {
+  width: 40px;
+  height: 40px;
+  top: 40%;
+  right: 10%;
+  background: rgba(var(--accent-color-rgb, 233, 30, 140), 0.05);
+}
+
+/* =============================================
+   Dark Mode
+   ============================================= */
+body.dark-mode .promo-card {
+  background: linear-gradient(145deg, rgba(45, 21, 32, 0.9) 0%, rgba(30, 15, 22, 0.9) 100%);
+}
+
+body.dark-mode .promo-title {
+  color: #fff;
+}
+
+body.dark-mode .promo-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =============================================
+   Responsive Design
+   ============================================= */
+@media (max-width: 1024px) {
+  .promo-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .promo-card.promo-card-3 {
+    grid-column: span 2;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .promo-card {
+    min-height: 320px;
+  }
+
+  .promo-card.promo-featured {
+    min-height: 350px;
+  }
+
+  .promo-content {
+    position: relative !important;
+  }
+
+  .promo-content .promo-cta {
+    display: none !important;
+  }
+
+  .promo-cta {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .promo-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    padding-top: 60px !important; /* Account for navbar on mobile */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .shop-page > .promo-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -60px !important; /* Compensate for shop-page padding-top */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .promo-section .container,
+  .shop-page > .promo-section .container,
+  .promo-section > .container,
+  .promo-section .container > *,
+  .shop-page .promo-section .container,
+  body .promo-section .container {
+    all: unset !important;
+    display: block !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-grid.single {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-grid.single .promo-card {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-card,
+  .promo-card.promo-card-3 {
+    min-height: 600px;
+    grid-column: span 1;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .promo-card.promo-featured {
+    min-height: 650px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Make image fill the box completely */
+  .promo-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .promo-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 120% !important;
+    min-height: 120% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    opacity: 0.35 !important;
+  }
+
+  .promo-card.promo-featured .promo-image img {
+    opacity: 0.3 !important;
+    height: 140% !important;
+    min-height: 140% !important;
+  }
+
+  .promo-content {
+    position: relative !important;
+    padding: 2.5rem 1.5rem !important;
+    margin-top: 40px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 5 !important;
+    overflow: visible !important;
+  }
+
+  .promo-content .promo-cta {
+    display: none !important;
+  }
+
+  .promo-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .promo-subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .promo-offer {
+    font-size: 1.5rem;
+  }
+
+  .promo-offer.big-offer {
+    font-size: 2.2rem;
+    font-weight: 800;
+  }
+
+  .promo-badge {
+    font-size: 0.7rem !important;
+    padding: 0.4rem 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 15px rgba(var(--accent-color-rgb, 233, 30, 140), 0.3) !important;
+  }
+
+  .promo-badge.mega-badge {
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1.5rem !important;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%) !important;
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+  }
+
+  .promo-cta {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.8px;
+    border-radius: 30px !important;
+    font-weight: 600;
+    max-width: none !important;
+    width: auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Also target btn-primary buttons in promo section */
+  .promo-section .btn-primary,
+  .promo-section .btn {
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.85rem !important;
+    border-radius: 30px !important;
+    font-weight: 600;
+    max-width: 180px;
+  }
+
+  .promo-timer .timer-label {
+    font-size: 0.85rem;
+  }
+
+  .promo-ribbon {
+    font-size: 0.55rem;
+    padding: 0.3rem 2.5rem;
+    right: -40px;
+    top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    padding-top: 56px !important; /* Account for navbar on small mobile */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .shop-page > .promo-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -56px !important; /* Compensate for shop-page padding-top on small mobile */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .promo-section .container,
+  .shop-page > .promo-section .container,
+  .promo-section > .container,
+  .promo-section .container > *,
+  .shop-page .promo-section .container,
+  body .promo-section .container {
+    all: unset !important;
+    display: block !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-grid {
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .promo-card {
+    min-height: 550px;
+    border-radius: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .promo-card.promo-featured {
+    min-height: 600px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Make image fill the box completely */
+  .promo-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .promo-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 120% !important;
+    min-height: 120% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    opacity: 0.35 !important;
+  }
+
+  .promo-card.promo-featured .promo-image img {
+    opacity: 0.3 !important;
+    height: 140% !important;
+    min-height: 140% !important;
+  }
+
+  .promo-content {
+    position: relative !important;
+    padding: 2.25rem 1.5rem !important;
+    margin-top: 40px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.1rem;
+    z-index: 5 !important;
+    overflow: visible !important;
+  }
+
+  .promo-content .promo-cta {
+    display: none !important;
+  }
+
+  .promo-title {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .promo-subtitle {
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  .promo-offer {
+    font-size: 1.4rem;
+  }
+
+  .promo-offer.big-offer {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .promo-badge {
+    font-size: 0.7rem !important;
+    padding: 0.4rem 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 15px rgba(var(--accent-color-rgb, 233, 30, 140), 0.3) !important;
+  }
+
+  .promo-badge.mega-badge {
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1.5rem !important;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%) !important;
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .promo-section {
+    padding-top: 52px !important; /* Account for navbar on very small mobile */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .shop-page > .promo-section {
+    margin-top: -52px !important; /* Compensate for very small mobile */
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+
+  .promo-card {
+    min-height: 520px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .promo-card.promo-featured {
+    min-height: 570px;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Make image fill the box completely */
+  .promo-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .promo-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 120% !important;
+    min-height: 120% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    opacity: 0.35 !important;
+  }
+
+  .promo-card.promo-featured .promo-image img {
+    opacity: 0.3 !important;
+    height: 140% !important;
+    min-height: 140% !important;
+  }
+
+  .promo-content {
+    position: relative !important;
+    padding: 2rem 1.25rem !important;
+    margin-top: 35px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    z-index: 5 !important;
+    overflow: visible !important;
+  }
+
+  .promo-content .promo-cta {
+    display: none !important;
+  }
+
+  .promo-title {
+    font-size: 1.7rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .promo-subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .promo-offer {
+    font-size: 1.3rem;
+  }
+
+  .promo-offer.big-offer {
+    font-size: 1.85rem;
+    font-weight: 800;
+  }
+
+  .promo-badge {
+    font-size: 0.7rem !important;
+    padding: 0.4rem 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 15px rgba(var(--accent-color-rgb, 233, 30, 140), 0.3) !important;
+  }
+
+  .promo-badge.mega-badge {
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1.5rem !important;
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%) !important;
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    border-radius: 20px !important;
+  }
+
+  .promo-cta {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 0.6rem 1.25rem !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.6px;
+    border-radius: 28px !important;
+    font-weight: 600;
+    max-width: none !important;
+    width: auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Also target btn-primary buttons in promo section for very small screens */
+  .promo-section .btn-primary,
+  .promo-section .btn {
+    padding: 0.6rem 1.25rem !important;
+    font-size: 0.8rem !important;
+    border-radius: 28px !important;
+    font-weight: 600;
+    max-width: 160px;
+  }
+
+  .promo-timer .timer-label {
+    font-size: 0.8rem;
+  }
+
+  .promo-sparkles .sparkle {
+    width: 6px;
+    height: 6px;
+  }
+
+  .promo-stars .star {
+    font-size: 0.8rem;
+  }
+
+  .promo-confetti .confetti {
+    width: 8px;
+    height: 8px;
+  }
+}

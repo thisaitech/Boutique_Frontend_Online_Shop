@@ -1,0 +1,1358 @@
+/* =============================================
+   About Page - Full Parallax Edition
+   ============================================= */
+
+.about-page-parallax {
+  overflow-x: hidden;
+  background: var(--primary-bg);
+}
+
+/* =============================================
+   Hero Section - Full Screen Parallax
+   ============================================= */
+.about-hero-parallax {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.hero-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.hero-content-centered {
+  text-align: center;
+  max-width: 800px;
+  color: white;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.hero-label svg {
+  color: #ffd700;
+}
+
+.hero-content-centered h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #e91e8c, #ffd700, #4da8da);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-content-centered p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  background: white;
+  color: var(--primary-pink);
+  border-color: white;
+}
+
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  width: auto;
+  min-width: 200px;
+  text-align: center;
+  z-index: 10;
+}
+
+.scroll-down-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-down-indicator svg {
+  font-size: 1.5rem;
+}
+
+/* =============================================
+   Story Section - Parallax Background
+   ============================================= */
+.about-story-parallax {
+  position: relative;
+  padding: 120px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.story-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(233, 30, 140, 0.1), rgba(77, 168, 218, 0.1));
+  color: var(--primary-pink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.story-content h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+}
+
+.story-text p {
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.story-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(233, 30, 140, 0.05);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(233, 30, 140, 0.1);
+  transform: translateX(5px);
+}
+
+.check-icon {
+  color: var(--primary-pink);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Story Image Stack */
+.story-image-stack {
+  position: relative;
+  padding: 30px;
+}
+
+.image-main {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.image-main img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-secondary {
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+  width: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.image-secondary img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.experience-floating-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, var(--primary-pink), #ff6b9d);
+  color: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(233, 30, 140, 0.3);
+}
+
+.badge-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  line-height: 1;
+}
+
+.badge-text {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* =============================================
+   Stats Section - Parallax
+   ============================================= */
+.about-stats-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.stats-parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.stats-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(233, 30, 140, 0.92), rgba(77, 168, 218, 0.92));
+}
+
+.about-stats-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 60px;
+  color: white;
+}
+
+.stats-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+}
+
+.stats-header p {
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+.stats-grid-parallax {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.stat-card-parallax {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.stat-card-parallax:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.stat-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.8rem;
+}
+
+.stat-number-large {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 8px;
+}
+
+.stat-label-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* =============================================
+   Specializations Section
+   ============================================= */
+.specializations-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--primary-bg) 0%, rgba(77, 168, 218, 0.05) 100%);
+  overflow-x: visible;
+}
+
+.specializations-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header .section-label {
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.specializations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.spec-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.spec-card:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.spec-image {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.spec-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.spec-card:hover .spec-image img {
+  transform: scale(1.1);
+}
+
+.spec-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  color: white;
+}
+
+.spec-count {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.spec-count-label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.spec-card h3 {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* =============================================
+   Mission Section - Full Parallax
+   ============================================= */
+.mission-parallax-section {
+  position: relative;
+  padding: 150px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.mission-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+
+.mission-label {
+  display: inline-block;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.mission-content h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.3;
+}
+
+.mission-content > p {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  opacity: 0.95;
+  margin-bottom: 40px;
+}
+
+.mission-quote {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.mission-quote blockquote {
+  font-size: 1.4rem;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 15px;
+  line-height: 1.6;
+}
+
+.mission-quote cite {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  font-style: normal;
+}
+
+/* =============================================
+   Values Section
+   ============================================= */
+.values-parallax-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, rgba(77, 168, 218, 0.05) 0%, var(--primary-bg) 100%);
+}
+
+.values-grid-parallax {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.value-card-parallax {
+  padding: 40px 30px;
+  text-align: center;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.value-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.value-card-parallax h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.value-card-parallax p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* =============================================
+   Timeline Section
+   ============================================= */
+.timeline-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--primary-bg), rgba(233, 30, 140, 0.03));
+}
+
+.timeline-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary-pink), var(--primary-blue));
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item.left {
+  justify-content: flex-start;
+  padding-right: calc(50% + 40px);
+}
+
+.timeline-item.right {
+  justify-content: flex-end;
+  padding-left: calc(50% + 40px);
+}
+
+.timeline-content {
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 400px;
+  position: relative;
+}
+
+.timeline-year {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-pink), var(--primary-blue));
+  color: white;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.timeline-content h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.timeline-content p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 4px solid var(--primary-pink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  box-shadow: 0 0 0 6px rgba(233, 30, 140, 0.2);
+}
+
+/* =============================================
+   CTA Section - Parallax
+   ============================================= */
+.cta-parallax-section {
+  position: relative;
+  padding: 120px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.cta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(233, 30, 140, 0.9) 0%,
+    rgba(77, 168, 218, 0.85) 100%
+  );
+}
+
+.cta-content-parallax {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-content-parallax h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+}
+
+.cta-content-parallax p {
+  font-size: 1.2rem;
+  opacity: 0.95;
+  margin-bottom: 40px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-lg {
+  padding: 16px 36px;
+  font-size: 1.05rem;
+}
+
+.btn-lg svg {
+  margin-right: 8px;
+}
+
+/* =============================================
+   Glass Card Effect
+   ============================================= */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   RESPONSIVE STYLES
+   ============================================= */
+
+/* Tablet Landscape */
+@media (max-width: 1200px) {
+  .stats-grid-parallax,
+  .specializations-grid,
+  .values-grid-parallax {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-content-centered h1 {
+    font-size: 3.2rem;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 992px) {
+  .about-hero-parallax {
+    min-height: 600px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 2.8rem;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .story-image-stack {
+    order: -1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .story-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .mission-content h2 {
+    font-size: 2.4rem;
+  }
+
+  .timeline-line {
+    left: 20px;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    justify-content: flex-start;
+    padding-left: 60px;
+    padding-right: 0;
+  }
+
+  .timeline-dot {
+    left: 20px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  .about-hero-parallax {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content-centered p {
+    font-size: 1rem;
+  }
+
+  .hero-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-cta-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .about-story-parallax,
+  .about-stats-section,
+  .specializations-section,
+  .mission-parallax-section,
+  .values-parallax-section,
+  .timeline-section,
+  .cta-parallax-section {
+    padding: 60px 0;
+    /* Disable fixed attachment for mobile - causes issues on iOS */
+    background-attachment: scroll;
+  }
+
+  .stats-grid-parallax,
+  .values-grid-parallax {
+    gap: 15px;
+  }
+
+  .stat-card-parallax {
+    padding: 25px 15px;
+  }
+
+  .stat-number-large {
+    font-size: 2.2rem;
+  }
+
+  .specializations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .spec-image {
+    height: 200px;
+  }
+
+  .spec-card h3 {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .mission-content h2 {
+    font-size: 2rem;
+  }
+
+  .mission-quote {
+    padding: 25px;
+  }
+
+  .mission-quote blockquote {
+    font-size: 1.15rem;
+  }
+
+  .cta-content-parallax h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .story-features {
+    grid-template-columns: 1fr;
+  }
+
+  .image-secondary {
+    width: 150px;
+    left: -10px;
+  }
+
+  .image-secondary img {
+    height: 120px;
+  }
+
+  .experience-floating-badge {
+    padding: 20px;
+  }
+
+  .badge-number {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 576px) {
+  .about-hero-parallax {
+    padding: 70px 15px 40px;
+  }
+
+  .hero-label {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .hero-content-centered p {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .scroll-down-indicator {
+    bottom: 12px;
+    font-size: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 180px;
+    max-width: 90%;
+    padding: var(--spacing-sm);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .scroll-down-indicator span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .scroll-down-indicator svg {
+    font-size: 1.2rem;
+  }
+
+  .section-label {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+
+  .story-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .story-text p {
+    font-size: 0.95rem;
+  }
+
+  .feature-item {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .stats-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .stats-grid-parallax {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card-parallax {
+    padding: 20px 12px;
+    border-radius: 15px;
+  }
+
+  .stat-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .stat-number-large {
+    font-size: 1.8rem;
+  }
+
+  .stat-label-text {
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .specializations-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .spec-image {
+    height: 160px;
+  }
+
+  .spec-count {
+    font-size: 1.5rem;
+  }
+
+  .spec-count-label {
+    font-size: 0.75rem;
+  }
+
+  .spec-card h3 {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .mission-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .mission-content > p {
+    font-size: 1rem;
+  }
+
+  .mission-quote {
+    padding: 20px;
+  }
+
+  .mission-quote blockquote {
+    font-size: 1rem;
+  }
+
+  .values-grid-parallax {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .value-card-parallax {
+    padding: 25px 15px;
+    border-radius: 15px;
+  }
+
+  .value-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .value-card-parallax h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .value-card-parallax p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .timeline-content {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+  }
+
+  .timeline-content h4 {
+    font-size: 1.1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+  }
+
+  .cta-content-parallax h2 {
+    font-size: 1.6rem;
+  }
+
+  .cta-content-parallax p {
+    font-size: 1rem;
+  }
+
+  .btn-lg {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+  }
+
+  .story-image-stack {
+    padding: 15px;
+  }
+
+  .image-main img {
+    height: 320px;
+  }
+
+  .image-secondary {
+    width: 120px;
+    left: 0;
+    bottom: -10px;
+  }
+
+  .image-secondary img {
+    height: 100px;
+  }
+
+  .experience-floating-badge {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .badge-number {
+    font-size: 2rem;
+  }
+
+  .badge-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 400px) {
+  .hero-content-centered h1 {
+    font-size: 1.5rem;
+  }
+
+  .story-content h2,
+  .mission-content h2,
+  .cta-content-parallax h2 {
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .stats-grid-parallax,
+  .specializations-grid,
+  .values-grid-parallax {
+    gap: 8px;
+  }
+
+  .stat-number-large {
+    font-size: 1.5rem;
+  }
+
+  .stat-label-text {
+    font-size: 0.7rem;
+  }
+
+  .spec-image {
+    height: 130px;
+  }
+
+  .value-emoji {
+    font-size: 2rem;
+  }
+
+  .value-card-parallax h3 {
+    font-size: 0.9rem;
+  }
+
+  .value-card-parallax p {
+    font-size: 0.8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 45px;
+  }
+
+  .timeline-line {
+    left: 15px;
+  }
+
+  .timeline-dot {
+    left: 15px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .timeline-content {
+    padding: 15px;
+  }
+
+  .image-main img {
+    height: 260px;
+  }
+}
+
+/* Landscape orientation for small devices */
+@media (max-height: 500px) and (orientation: landscape) {
+  .about-hero-parallax {
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .hero-content-centered h1 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-content-centered p {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-cta-buttons {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .hero-cta-buttons .btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+
+  .scroll-down-indicator {
+    display: none;
+  }
+}
+
+/* Smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  .about-page-parallax {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .about-page-parallax * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .about-story-parallax,
+  .about-stats-section .stats-parallax-bg,
+  .mission-parallax-section,
+  .cta-parallax-section {
+    background-attachment: scroll !important;
+  }
+}

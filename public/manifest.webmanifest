@@ -1,0 +1,16 @@
+{
+  "name": "ThisAI Boutique",
+  "short_name": "ThisAI",
+  "description": "Premium Women's Fashion E-commerce",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF5EE",
+  "theme_color": "#E91E8C",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

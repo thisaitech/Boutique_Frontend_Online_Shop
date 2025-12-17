@@ -1,0 +1,128 @@
+.video-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.video-upload-input-group {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: stretch;
+}
+
+.video-upload-input-group .input-field {
+  flex: 1;
+}
+
+.video-upload-buttons {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.video-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-width: 44px;
+}
+
+.video-upload-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.3);
+}
+
+.video-upload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.video-upload-btn.clear {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.video-upload-btn.clear:hover {
+  background: rgba(231, 76, 60, 0.2);
+}
+
+.loader-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.video-preview-container {
+  margin-top: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--glass-border);
+}
+
+.video-preview {
+  width: 100%;
+  max-height: 300px;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.video-preview-container {
+  position: relative;
+}
+
+.s3-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.upload-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+

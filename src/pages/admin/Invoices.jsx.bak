@@ -1,0 +1,610 @@
+import { useState, useMemo, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  FiFileText, FiDownload, FiMail, FiSearch, FiFilter,
+  FiEye, FiPrinter, FiCheckCircle, FiClock, FiX, FiUser,
+  FiDollarSign, FiShoppingBag, FiCalendar, FiTrendingUp, FiMoreVertical
+} from 'react-icons/fi'
+import { useLocation } from 'react-router-dom'
+import { useGlobal } from '../../context/GlobalContext'
+import toast from 'react-hot-toast'
+import './AdminPages.css'
+
+function Invoices() {
+  const { orders } = useGlobal()
+  const location = useLocation()
+  const [searchTerm, setSearchTerm] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [selectedInvoice, setSelectedInvoice] = useState(null)
+  const [showPreview, setShowPreview] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const orderId = params.get('orderId')
+    if (orderId) {
+      setSearchTerm(orderId)
+    }
+  }, [location.search])
+
+  // Generate invoices from orders
+  const invoices = useMemo(() => {
+    return orders.map((order, index) => ({
+      id: `INV-${String(index + 1001).padStart(5, '0')}`,
+      orderId: order.id,
+      orderNumber: order.orderNumber || `ORD-${String(order.id).padStart(5, '0')}`,
+      customerName: order.customerName || order.customer?.name || 'Guest Customer',
+      customerEmail: order.customerEmail || order.customer?.email || '',
+      date: order.createdAt || order.date || new Date().toISOString(),
+      dueDate: new Date(new Date(order.createdAt || order.date).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      items: order.items || [],
+      subtotal: order.subtotal || order.total || 0,
+      tax: order.tax || 0,
+      shipping: order.shipping || 0,
+      discount: order.discount || 0,
+      total: order.total || 0,
+      status: order.paymentStatus === 'paid' ? 'paid' : 'pending',
+      paymentMethod: order.paymentMethod || 'Razorpay',
+      address: order.shippingAddress || {}
+    }))
+  }, [orders])
+
+  // Filter invoices
+  const filteredInvoices = useMemo(() => {
+    return invoices.filter(invoice => {
+      const matchesSearch = invoice.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           invoice.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           invoice.orderNumber.toLowerCase().includes(searchTerm.toLowerCase())
+
+      const matchesStatus = statusFilter === 'all' || invoice.status === statusFilter
+
+      return matchesSearch && matchesStatus
+    })
+  }, [invoices, searchTerm, statusFilter])
+
+  // Calculate stats
+  const stats = useMemo(() => {
+    const total = invoices.length
+    const paid = invoices.filter(inv => inv.status === 'paid').length
+    const pending = invoices.filter(inv => inv.status === 'pending').length
+    const totalRevenue = invoices.reduce((sum, inv) => sum + (inv.status === 'paid' ? inv.total : 0), 0)
+    return { total, paid, pending, totalRevenue }
+  }, [invoices])
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(price)
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+
+  const paymentLabel = (method) => {
+    if (method === 'cod') return 'Cash on Delivery'
+    if (method === 'razorpay_card') return 'Razorpay Card'
+    if (method === 'razorpay_upi') return 'Razorpay UPI'
+    return method || 'Online Payment'
+  }
+
+  const generatePDF = (invoice) => {
+    const printWindow = window.open('', '_blank')
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Invoice ${invoice.id}</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 40px; }
+          .invoice-header { text-align: center; margin-bottom: 40px; border-bottom: 2px solid #E91E8C; padding-bottom: 20px; }
+          .invoice-header h1 { color: #E91E8C; margin: 0; }
+          .invoice-info { display: flex; justify-content: space-between; margin-bottom: 30px; }
+          .invoice-info div { width: 48%; }
+          .invoice-info h3 { color: #333; font-size: 14px; margin-bottom: 5px; }
+          .invoice-info p { margin: 3px 0; font-size: 13px; color: #666; }
+          table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+          th { background: #f8f9fa; font-weight: 600; }
+          .total-section { text-align: right; margin-top: 20px; }
+          .total-section div { margin: 8px 0; }
+          .total-section .grand-total { font-size: 18px; font-weight: bold; color: #E91E8C; margin-top: 15px; padding-top: 15px; border-top: 2px solid #E91E8C; }
+          .footer { margin-top: 50px; text-align: center; font-size: 12px; color: #999; }
+        </style>
+      </head>
+      <body>
+        <div class="invoice-header">
+          <h1>INVOICE</h1>
+          <p style="margin: 5px 0; color: #666;">ThisAI Boutique</p>
+          <p style="margin: 0; font-size: 12px; color: #999;">Elegant Fashion for Every Occasion</p>
+        </div>
+
+        <div class="invoice-info">
+          <div>
+            <h3>Bill To:</h3>
+            <p><strong>${invoice.customerName}</strong></p>
+            <p>${invoice.customerEmail}</p>
+            <p>${invoice.address.street || ''}</p>
+            <p>${invoice.address.city || ''}, ${invoice.address.state || ''} ${invoice.address.pincode || ''}</p>
+            <p>${invoice.address.phone || ''}</p>
+          </div>
+          <div style="text-align: right;">
+            <h3>Invoice Details:</h3>
+            <p><strong>Invoice #:</strong> ${invoice.id}</p>
+            <p><strong>Order #:</strong> ${invoice.orderNumber}</p>
+            <p><strong>Date:</strong> ${formatDate(invoice.date)}</p>
+            <p><strong>Due Date:</strong> ${formatDate(invoice.dueDate)}</p>
+            <p><strong>Status:</strong> <span style="color: ${invoice.status === 'paid' ? '#27ae60' : '#e67e22'}; font-weight: bold;">${invoice.status.toUpperCase()}</span></p>
+            <p><strong>Payment:</strong> ${paymentLabel(invoice.paymentMethod)}</p>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 50%;">Item</th>
+              <th style="width: 15%;">Quantity</th>
+              <th style="width: 17.5%;">Unit Price</th>
+              <th style="width: 17.5%;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${invoice.items.map(item => `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity || 1}</td>
+                <td>${formatPrice(item.price)}</td>
+                <td>${formatPrice(item.price * (item.quantity || 1))}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div class="total-section">
+          <div><strong>Subtotal:</strong> ${formatPrice(invoice.subtotal)}</div>
+          ${invoice.tax > 0 ? `<div><strong>Tax:</strong> ${formatPrice(invoice.tax)}</div>` : ''}
+          ${invoice.shipping > 0 ? `<div><strong>Shipping:</strong> ${formatPrice(invoice.shipping)}</div>` : ''}
+          ${invoice.discount > 0 ? `<div style="color: #27ae60;"><strong>Discount:</strong> -${formatPrice(invoice.discount)}</div>` : ''}
+          <div class="grand-total"><strong>Total Amount:</strong> ${formatPrice(invoice.total)}</div>
+        </div>
+
+        <div class="footer">
+          <p>Thank you for your business!</p>
+          <p>For any queries, contact us at support@thisaiboutique.com | +91 98765 43210</p>
+          <p style="margin-top: 10px; font-style: italic;">This is a computer-generated invoice and does not require a signature.</p>
+        </div>
+      </body>
+      </html>
+    `
+    printWindow.document.write(html)
+    printWindow.document.close()
+    printWindow.onload = () => {
+      printWindow.print()
+    }
+
+    toast.success('Invoice generated successfully')
+  }
+
+  const sendEmail = (invoice) => {
+    setTimeout(() => {
+      toast.success(`Invoice sent to ${invoice.customerEmail}`)
+    }, 1000)
+  }
+
+  const downloadInvoice = (invoice) => {
+    generatePDF(invoice)
+  }
+
+  const viewInvoice = (invoice) => {
+    setSelectedInvoice(invoice)
+    setShowPreview(true)
+  }
+
+  return (
+    <div className="invoice-page-wrapper">
+      {/* Header Section */}
+      <div className="invoice-page-header">
+        <div className="invoice-header-content">
+          <div className="invoice-page-title">
+            <div className="title-icon-wrapper">
+              <FiFileText />
+            </div>
+            <div>
+              <h1>Invoice Management</h1>
+              <p>Manage and track all customer invoices</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Overview */}
+        <div className="invoice-stats-overview">
+          <motion.div 
+            className="invoice-stat-box stat-box-total"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="stat-box-icon">
+              <FiFileText />
+            </div>
+            <div className="stat-box-content">
+              <div className="stat-box-value">{stats.total}</div>
+              <div className="stat-box-label">Total Invoices</div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="invoice-stat-box stat-box-paid"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="stat-box-icon">
+              <FiCheckCircle />
+            </div>
+            <div className="stat-box-content">
+              <div className="stat-box-value">{stats.paid}</div>
+              <div className="stat-box-label">Paid</div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="invoice-stat-box stat-box-pending"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <div className="stat-box-icon">
+              <FiClock />
+            </div>
+            <div className="stat-box-content">
+              <div className="stat-box-value">{stats.pending}</div>
+              <div className="stat-box-label">Pending</div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="invoice-stat-box stat-box-revenue"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <div className="stat-box-icon">
+              <FiDollarSign />
+            </div>
+            <div className="stat-box-content">
+              <div className="stat-box-value">{formatPrice(stats.totalRevenue)}</div>
+              <div className="stat-box-label">Total Revenue</div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Search and Filter Bar */}
+      <div className="invoice-controls-bar glass-card">
+        <div className="invoice-search-wrapper">
+          <FiSearch className="invoice-search-icon" />
+          <input
+            type="text"
+            className="invoice-search-input"
+            placeholder="Search invoices, customers, or order numbers..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="invoice-filter-group">
+          <button
+            className={`invoice-filter-btn ${statusFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('all')}
+          >
+            <FiFilter /> All
+          </button>
+          <button
+            className={`invoice-filter-btn ${statusFilter === 'paid' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('paid')}
+          >
+            <FiCheckCircle /> Paid
+          </button>
+          <button
+            className={`invoice-filter-btn ${statusFilter === 'pending' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('pending')}
+          >
+            <FiClock /> Pending
+          </button>
+        </div>
+      </div>
+
+      {/* Invoice List */}
+      <div className="invoice-list-container">
+        {filteredInvoices.length > 0 ? (
+          <div className="invoice-list-grid">
+            {filteredInvoices.map((invoice, index) => (
+              <motion.div
+                key={invoice.id}
+                className="invoice-card-item glass-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              >
+                {/* Card Top Section */}
+                <div className="invoice-card-top">
+                  <div className="invoice-card-id-section">
+                    <div className="invoice-id-display">
+                      <FiFileText className="invoice-id-icon" />
+                      <span className="invoice-id-text">{invoice.id}</span>
+                    </div>
+                    <div className="invoice-date-display">
+                      <FiCalendar size={14} />
+                      <span>{formatDate(invoice.date)}</span>
+                    </div>
+                  </div>
+                  <div className={`invoice-status-chip ${invoice.status}`}>
+                    {invoice.status === 'paid' ? <FiCheckCircle /> : <FiClock />}
+                    <span>{invoice.status.toUpperCase()}</span>
+                  </div>
+                </div>
+
+                {/* Customer Info */}
+                <div className="invoice-card-customer">
+                  <div className="invoice-customer-avatar">
+                    {invoice.customerName.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="invoice-customer-details">
+                    <h3 className="invoice-customer-name">{invoice.customerName}</h3>
+                    <p className="invoice-customer-email">{invoice.customerEmail || 'No email'}</p>
+                  </div>
+                </div>
+
+                {/* Invoice Info Grid */}
+                <div className="invoice-info-grid">
+                  <div className="invoice-info-item">
+                    <div className="invoice-info-icon">
+                      <FiShoppingBag />
+                    </div>
+                    <div className="invoice-info-text">
+                      <span className="invoice-info-label">Order #</span>
+                      <span className="invoice-info-value">{invoice.orderNumber}</span>
+                    </div>
+                  </div>
+                  <div className="invoice-info-item">
+                    <div className="invoice-info-icon">
+                      <FiTrendingUp />
+                    </div>
+                    <div className="invoice-info-text">
+                      <span className="invoice-info-label">Items</span>
+                      <span className="invoice-info-value">{invoice.items.length}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment Method */}
+                <div className="invoice-payment-method">
+                  <span className="payment-method-tag">{paymentLabel(invoice.paymentMethod)}</span>
+                </div>
+
+                {/* Amount Display */}
+                <div className="invoice-amount-display">
+                  <span className="invoice-amount-label">Total Amount</span>
+                  <span className="invoice-amount-value">{formatPrice(invoice.total)}</span>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="invoice-card-actions">
+                  <button
+                    className="invoice-action-btn action-view"
+                    onClick={() => viewInvoice(invoice)}
+                    title="View Details"
+                  >
+                    <FiEye />
+                    <span>View</span>
+                  </button>
+                  <button
+                    className="invoice-action-btn action-download"
+                    onClick={() => downloadInvoice(invoice)}
+                    title="Download PDF"
+                  >
+                    <FiDownload />
+                    <span>Download</span>
+                  </button>
+                  <button
+                    className="invoice-action-btn action-print"
+                    onClick={() => generatePDF(invoice)}
+                    title="Print"
+                  >
+                    <FiPrinter />
+                    <span>Print</span>
+                  </button>
+                  <button
+                    className="invoice-action-btn action-email"
+                    onClick={() => sendEmail(invoice)}
+                    title="Email"
+                    disabled={!invoice.customerEmail}
+                  >
+                    <FiMail />
+                    <span>Email</span>
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <motion.div 
+            className="invoice-empty-state"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <div className="invoice-empty-icon">
+              <FiFileText size={80} />
+            </div>
+            <h3>No invoices found</h3>
+            <p>Try adjusting your search or filter criteria</p>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Invoice Preview Modal */}
+      <AnimatePresence>
+        {showPreview && selectedInvoice && (
+          <motion.div
+            className="invoice-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowPreview(false)}
+          >
+            <motion.div
+              className="invoice-modal-content glass-card"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="invoice-modal-header">
+                <div className="invoice-modal-title-section">
+                  <h2>
+                    <FiFileText /> Invoice Details
+                  </h2>
+                  <p>{selectedInvoice.id}</p>
+                </div>
+                <button 
+                  className="invoice-modal-close"
+                  onClick={() => setShowPreview(false)}
+                >
+                  <FiX />
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="invoice-modal-body">
+                {/* Invoice Brand Header */}
+                <div className="invoice-modal-brand">
+                  <div className="invoice-brand-info">
+                    <h1>INVOICE</h1>
+                    <p>ThisAI Boutique</p>
+                  </div>
+                  <div className="invoice-modal-meta">
+                    <div className="invoice-meta-row">
+                      <span>Invoice #:</span>
+                      <strong>{selectedInvoice.id}</strong>
+                    </div>
+                    <div className="invoice-meta-row">
+                      <span>Date:</span>
+                      <strong>{formatDate(selectedInvoice.date)}</strong>
+                    </div>
+                    <div className={`invoice-status-chip ${selectedInvoice.status}`}>
+                      {selectedInvoice.status === 'paid' ? <FiCheckCircle /> : <FiClock />}
+                      <span>{selectedInvoice.status.toUpperCase()}</span>
+                    </div>
+                    <div className="invoice-meta-row">
+                      <span>Payment:</span>
+                      <strong>{paymentLabel(selectedInvoice.paymentMethod)}</strong>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Customer Section */}
+                <div className="invoice-modal-customer">
+                  <h3>
+                    <FiUser /> Bill To:
+                  </h3>
+                  <div className="invoice-modal-customer-details">
+                    <p><strong>{selectedInvoice.customerName}</strong></p>
+                    <p>{selectedInvoice.customerEmail}</p>
+                    {selectedInvoice.address && (
+                      <>
+                        {selectedInvoice.address.street && <p>{selectedInvoice.address.street}</p>}
+                        <p>{[selectedInvoice.address.city, selectedInvoice.address.state, selectedInvoice.address.pincode].filter(Boolean).join(', ')}</p>
+                        {selectedInvoice.address.phone && <p>{selectedInvoice.address.phone}</p>}
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Items Table */}
+                <div className="invoice-modal-table-wrapper">
+                  <table className="invoice-modal-table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedInvoice.items.map((item, idx) => (
+                        <tr key={idx}>
+                          <td>{item.name}</td>
+                          <td>{item.quantity || 1}</td>
+                          <td>{formatPrice(item.price)}</td>
+                          <td>{formatPrice(item.price * (item.quantity || 1))}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Totals Section */}
+                <div className="invoice-modal-totals">
+                  <div className="invoice-total-row">
+                    <span>Subtotal:</span>
+                    <span>{formatPrice(selectedInvoice.subtotal)}</span>
+                  </div>
+                  {selectedInvoice.tax > 0 && (
+                    <div className="invoice-total-row">
+                      <span>Tax:</span>
+                      <span>{formatPrice(selectedInvoice.tax)}</span>
+                    </div>
+                  )}
+                  {selectedInvoice.shipping > 0 && (
+                    <div className="invoice-total-row">
+                      <span>Shipping:</span>
+                      <span>{formatPrice(selectedInvoice.shipping)}</span>
+                    </div>
+                  )}
+                  {selectedInvoice.discount > 0 && (
+                    <div className="invoice-total-row invoice-total-discount">
+                      <span>Discount:</span>
+                      <span>-{formatPrice(selectedInvoice.discount)}</span>
+                    </div>
+                  )}
+                  <div className="invoice-total-row invoice-total-grand">
+                    <span><strong>Total:</strong></span>
+                    <span><strong>{formatPrice(selectedInvoice.total)}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="invoice-modal-footer">
+                <button 
+                  className="invoice-modal-btn btn-secondary"
+                  onClick={() => setShowPreview(false)}
+                >
+                  Close
+                </button>
+                <button 
+                  className="invoice-modal-btn btn-primary"
+                  onClick={() => generatePDF(selectedInvoice)}
+                >
+                  <FiDownload /> Download PDF
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export default Invoices
+

@@ -1,0 +1,464 @@
+/* =============================================================================
+   FLAT INFINITE CAROUSEL - Clean Light Mode
+   No 3D rotation, No parallax, Pure 2D sliding ribbon
+   ============================================================================= */
+
+.flat-carousel {
+  position: relative;
+  width: 100%;
+  background: #f8fafc; /* bg-slate-50 */
+  border-radius: 1.5rem;
+  padding: 3rem 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .flat-carousel {
+    padding: 4rem 2rem;
+  }
+}
+
+.flat-carousel-empty {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(100, 116, 139, 0.6);
+  font-size: 1.125rem;
+}
+
+/* =============================================================================
+   TRACK CONTAINER
+   ============================================================================= */
+
+.flat-carousel-track-container {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .flat-carousel-track-container {
+    min-height: 550px;
+  }
+}
+
+.flat-carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Ensure cards don't wrap */
+  flex-wrap: nowrap;
+}
+
+.flat-carousel-track:active {
+  cursor: grabbing;
+}
+
+/* =============================================================================
+   CARDS - Flat 2D Design (No 3D transforms)
+   ============================================================================= */
+
+.flat-carousel-card {
+  position: absolute;
+  width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  /* NO rotateY, NO translateZ - Pure flat 2D */
+  transform-origin: center center;
+  will-change: transform, opacity;
+  left: 50%;
+  margin-left: -140px; /* Half of width for centering */
+}
+
+/* Product Badges Container - Stacked vertically */
+.flat-carousel-card .product-badge-container {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  align-items: flex-start;
+  width: auto;
+  pointer-events: none;
+}
+
+/* Ensure all badges are block-level and properly positioned */
+.flat-carousel-card .product-badge-container > * {
+  position: relative;
+  display: block;
+  pointer-events: auto;
+  margin: 0;
+}
+
+/* Offer Badge - Red square badge (50x50) */
+.flat-carousel-card .offer-badge {
+  width: 50px;
+  height: 50px;
+  background: #ff4444;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+  padding: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* Discount Badge - Red gradient pill badge */
+.flat-carousel-card .discount-badge {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm, 4px);
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+  display: block;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin: 0;
+  width: fit-content;
+}
+
+/* Featured Badge - Semi-transparent background with white text */
+.flat-carousel-card .featured-badge {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm, 4px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: block;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.2;
+  margin: 0;
+  width: fit-content;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile: 2 smaller cards */
+@media (max-width: 767px) {
+  .flat-carousel-card {
+    width: 260px;
+    min-width: 260px;
+    margin-left: -130px;
+  }
+
+  /* Mobile badge adjustments */
+  .flat-carousel-card .product-badge-container {
+    top: 8px;
+    left: 8px;
+    gap: 6px;
+  }
+
+  /* Offer Badge - smaller on mobile */
+  .flat-carousel-card .offer-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 0.6rem;
+    padding: 2px;
+  }
+
+  /* Discount Badge - smaller on mobile */
+  .flat-carousel-card .discount-badge {
+    padding: 3px 8px;
+    font-size: 0.6rem;
+  }
+
+  /* Featured Badge - smaller on mobile */
+  .flat-carousel-card .featured-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+  }
+}
+
+/* Tablet: Medium cards */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .flat-carousel-card {
+    width: 300px;
+    min-width: 300px;
+    margin-left: -150px;
+  }
+}
+
+/* Desktop: Standard cards */
+@media (min-width: 1024px) {
+  .flat-carousel-card {
+    width: 280px;
+    min-width: 280px;
+    margin-left: -140px;
+  }
+}
+
+/* Active (Center) Card - Subtle pop with soft shadow */
+.flat-carousel-card.active {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+}
+
+/* Inactive (Side) Cards - Very light shadow */
+.flat-carousel-card:not(.active) {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06); /* shadow-sm */
+}
+
+/* Card Image - NO parallax, image stays static in frame */
+.flat-carousel-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.flat-carousel-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* NO transform, NO movement - Static image */
+}
+
+/* Card Info */
+.flat-carousel-card-info {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.flat-carousel-card-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b; /* slate-500 */
+  font-weight: 600;
+}
+
+.flat-carousel-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1e293b; /* slate-800 */
+  line-height: 1.4;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.flat-carousel-card-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e91e8c;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flat-carousel-card-original-price {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #94a3b8; /* slate-400 */
+  text-decoration: line-through;
+}
+
+/* Hover effect on active card */
+.flat-carousel-card.active:hover {
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 12px 15px -5px rgba(233, 30, 140, 0.1);
+}
+
+/* =============================================================================
+   NAVIGATION ARROWS
+   ============================================================================= */
+
+.flat-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.flat-carousel-arrow:hover {
+  background: #e91e8c;
+  color: white;
+  border-color: #e91e8c;
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.3);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.flat-carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.flat-carousel-arrow-left {
+  left: 1rem;
+}
+
+.flat-carousel-arrow-right {
+  right: 1rem;
+}
+
+/* Hide arrows on mobile */
+@media (max-width: 767px) {
+  .flat-carousel-arrow {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   PAGINATION DOTS
+   ============================================================================= */
+
+.flat-carousel-pagination {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 20;
+  padding: 0.75rem 1rem;
+  background: white;
+  border-radius: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.flat-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flat-carousel-dot:hover {
+  background: rgba(233, 30, 140, 0.6);
+  transform: scale(1.2);
+}
+
+.flat-carousel-dot.active {
+  width: 28px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #e91e8c 0%, #c2185b 100%);
+}
+
+/* Mobile: Hide pagination dots */
+@media (max-width: 767px) {
+  .flat-carousel-pagination {
+    display: none;
+  }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+.flat-carousel,
+.flat-carousel-track,
+.flat-carousel-card {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flat-carousel-card {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================================================
+   ACCESSIBILITY
+   ============================================================================= */
+
+.flat-carousel-arrow:focus-visible,
+.flat-carousel-dot:focus-visible {
+  outline: 2px solid rgba(233, 30, 140, 0.6);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .flat-carousel-card,
+  .flat-carousel-arrow {
+    transition: none !important;
+  }
+}
+
+/* =============================================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+  .flat-carousel-arrow {
+    width: 56px;
+    height: 56px;
+    font-size: 1.75rem;
+  }
+
+  .flat-carousel-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .flat-carousel-dot.active {
+    width: 32px;
+  }
+}
