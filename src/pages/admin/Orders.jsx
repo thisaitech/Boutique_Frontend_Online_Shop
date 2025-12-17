@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 import { motion } from 'framer-motion'
 import {
   FiShoppingCart,
@@ -151,7 +153,7 @@ function Orders() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/admin/orders/${editingOrder._id}/price`, {
+      const response = await fetch(`${API_URL}/admin/orders/${editingOrder._id}/price`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
