@@ -20,7 +20,7 @@ function Settings() {
   const [profileData, setProfileData] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    phone: user?.mobile || '+91 98765 43210',
+    phone: user?.phone || user?.mobile || '',
     address: '123, MG Road, Koramangala, Bangalore'
   })
   const [notifications, setNotifications] = useState({
@@ -44,6 +44,7 @@ function Settings() {
         // Update user in localStorage if needed
         const currentUser = JSON.parse(localStorage.getItem('thisai_user') || '{}')
         currentUser.name = profileData.name
+        currentUser.phone = profileData.phone
         currentUser.mobile = profileData.phone
         localStorage.setItem('thisai_user', JSON.stringify(currentUser))
       }
@@ -118,9 +119,23 @@ function Settings() {
     city: '',
     state: '',
     pincode: '',
-    phone: user?.mobile || '',
+    phone: user?.phone || user?.mobile || '',
     isDefault: false
   })
+
+  useEffect(() => {
+    if (!user || isEditing) return
+    setProfileData((prev) => ({
+      ...prev,
+      name: user?.name || '',
+      email: user?.email || '',
+      phone: user?.phone || user?.mobile || '',
+    }))
+    setAddressForm((prev) => ({
+      ...prev,
+      phone: user?.phone || user?.mobile || '',
+    }))
+  }, [user, isEditing])
   const [addressErrors, setAddressErrors] = useState({})
 
   const handleAddAddress = () => {
@@ -133,7 +148,7 @@ function Settings() {
       city: '',
       state: '',
       pincode: '',
-      phone: user?.mobile || '',
+      phone: user?.phone || user?.mobile || '',
       isDefault: false
     })
     setAddressErrors({})
