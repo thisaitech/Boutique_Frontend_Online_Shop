@@ -996,11 +996,19 @@ function Checkout() {
                         }}
                         style={{ marginRight: '10px', cursor: 'pointer', width: '18px', height: '18px' }}
                       />
-                      <img
-                        src={getCartItemImage(item)}
-                        alt={itemLabel}
-                        style={{ opacity: isSelected ? 1 : 0.5 }}
-                      />
+                      {(() => {
+                        const imageSrc = getCartItemImage(item)
+                        if (!imageSrc || imageSrc.includes('/images/placeholder.jpg')) {
+                          return null
+                        }
+                        return (
+                          <img
+                            src={imageSrc}
+                            alt={itemLabel}
+                            style={{ opacity: isSelected ? 1 : 0.5 }}
+                          />
+                        )
+                      })()}
                       <div className="summary-item-details">
                         <span className="item-name" style={{ opacity: isSelected ? 1 : 0.6 }}>{itemLabel}</span>
                         <span className="item-meta">
