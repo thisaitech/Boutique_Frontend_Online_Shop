@@ -108,6 +108,7 @@ function AuthenticatedLayout({ children }) {
   const siteConfig = useSelector(selectSiteConfig)
   const location = useLocation()
   const isHomePage = location.pathname === '/home'
+  const hideFooter = location.pathname === '/checkout'
 
   // Fetch site config on mount
   useEffect(() => {
@@ -142,8 +143,8 @@ function AuthenticatedLayout({ children }) {
       <main className="main-content">
         {children}
       </main>
-      <Footer />
-      <BackToTop />
+      {!hideFooter && <Footer />}
+      {!hideFooter && <BackToTop />}
     </>
   )
 }
